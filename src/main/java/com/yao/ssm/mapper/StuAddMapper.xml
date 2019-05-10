@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.StuAddMapper">
+    <insert id="insertStuAdd" parameterType="stuAdd">
+      insert into stu_add(sno) values (#{sno})
+    </insert>
+    <select id="findBySno" parameterType="int" resultType="stuAdd">
+      select * from stu_add where sno = #{value}
+    </select>
+    <update id="updateInformationBySno" parameterType="stuAdd">
+        update stu_add set saddress=#{saddress},semail=#{semail},sintro=#{sintro} where sno = #{sno}
+    </update>
+</mapper>

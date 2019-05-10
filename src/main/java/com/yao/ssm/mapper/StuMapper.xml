@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.StuMapper">
+  <insert id="insertStu" parameterType="stu">
+    insert into stu(sno,sname,passwd,sphone,gno,sreg_date) values (#{sno},#{sname},#{passwd},#{sphone},#{gno},#{sreg_date})
+  </insert>
+  <select id="findBySno" parameterType="int" resultType="stu">
+    select * from stu where sno = #{value}
+  </select>
+
+  <select id="findByStu" parameterType="stu">
+    select * from stu where sno = #{sno} and passwd = ${passwd}
+  </select>
+
+  <select id="findByPhone" parameterType="String" resultType="stu">
+    select * from stu where sphone = #{value}
+  </select>
+    <update id="updatePasswdBySno" parameterType="stu">
+        update stu set passwd = #{passwd} where sno = #{sno}
+    </update>
+    <update id="updateInformationBySno" parameterType="stu">
+        update stu set sname=#{sname},sage=#{sage},sgender=#{sgender},sphone=#{sphone},sbirth=#{sbirth} where sno = #{sno}
+    </update>
+</mapper>

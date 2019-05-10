@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+    <!--<context:component-scan base-package="cn.itcast.ssm.service.impl"></context:component-scan>-->
+    <bean id="stuService" class="com.yao.ssm.service.impl.StuServiceImpl"/>
+    <bean id="stuAddService" class="com.yao.ssm.service.impl.StuAddServiceImpl"/>
+    <bean id="sysService" class="com.yao.ssm.service.impl.SysServiceImpl"/>
+    <bean id="acaService" class="com.yao.ssm.service.impl.AcaServiceImpl"/>
+    <bean id="majorService" class="com.yao.ssm.service.impl.MajorServiceImpl"/>
+    <bean id="teaService" class="com.yao.ssm.service.impl.TeaServiceImpl"/>
+</beans>

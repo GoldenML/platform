@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.SysMapper">
+    <select id="findBySysno" parameterType="int" resultType="sys">
+        select * from sys where sysno = #{value}
+    </select>
+
+    <insert id="addTeacher" parameterType="tea">
+        insert into tea(tno,tname,passwd,tphone,major_id) values (#{tno},#{tname},#{passwd},#{tphone},#{major_id})
+    </insert>
+
+    <insert id="addTeacherAdd" parameterType="teaAdd">
+        insert into tea_add(tno,taddress,temail) values (#{tno},#{taddress},#{temail})
+    </insert>
+</mapper>
