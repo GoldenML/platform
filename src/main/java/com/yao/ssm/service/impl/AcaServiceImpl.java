@@ -5,6 +5,7 @@ import com.yao.ssm.po.Aca;
 import com.yao.ssm.service.AcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @create 2019-05-09 16:52
  */
 @Service("acaService")
+@Transactional
 public class AcaServiceImpl implements AcaService {
     @Autowired
     private AcaMapper acaMapper;

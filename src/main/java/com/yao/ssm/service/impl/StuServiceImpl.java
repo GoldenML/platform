@@ -2,11 +2,15 @@ package com.yao.ssm.service.impl;
 
 
 import com.yao.ssm.mapper.StuMapper;
+import com.yao.ssm.po.SleaveMessage;
 import com.yao.ssm.po.Stu;
+import com.yao.ssm.po.Tea;
 import com.yao.ssm.service.StuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 /**
@@ -46,4 +50,14 @@ public class StuServiceImpl implements StuService {
     public void updateInformationBySno(Stu stu) throws Exception {
         stuMapper.updateInformationBySno(stu);
     }
+
+    public int findMesCount(int sno) throws Exception {
+        return stuMapper.findMesCount(sno);
+    }
+
+    public List<Object> findMesBySno(int sno) throws Exception {
+        return stuMapper.findMesBySno(sno);
+    }
+
+
 }

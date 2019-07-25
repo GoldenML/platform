@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.TeaFileMapper">
+    <resultMap id="BaseResultMap" type="com.yao.ssm.po.TeaFile">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="tno" jdbcType="INTEGER" property="tno" />
+        <result column="tname" jdbcType="CHAR" property="tname" />
+        <result column="file_name" jdbcType="CHAR" property="fileName" />
+        <result column="upload_date" jdbcType="CHAR" property="uploadDate" />
+        <result column="praise_number" jdbcType="INTEGER" property="praiseNumber" />
+        <result column="bad_number" jdbcType="INTEGER" property="badNumber" />
+        <result column="coll_number" jdbcType="INTEGER" property="collNumber" />
+        <result column="download_number" jdbcType="INTEGER" property="downloadNumber" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yao.ssm.po.TeaFile">
+        <result column="file" jdbcType="LONGVARBINARY" property="file" />
+    </resultMap>
+
+    <!--<sql id="status">-->
+        <!--and status = 1-->
+    <!--</sql>-->
+    <!--插入-->
+    <insert id="insert" parameterType="teaFile">
+        insert into TeaFile ( tno,tname, file_name,
+          upload_date, file)
+        values (#{tno,jdbcType=INTEGER},#{tname,jdbcType=CHAR}, #{fileName,jdbcType=CHAR},
+          #{uploadDate,jdbcType=DATE},  #{file,jdbcType=LONGVARBINARY})
+  </insert>
+    <select id="findTeaAllFile" parameterType="int" resultMap="BaseResultMap">
+      select *
+      from TeaFile
+      where status = 1 and  tno = #{tno} limit #{currentPage},#{pageSize}
+    </select>
+    <select id="findTeaAllFileCount" parameterType="int" resultType="int">
+      select count(*)
+      from TeaFile
+      where status = 1 and tno = #{value}
+    </select>
+    <select id="findAllTeaFileCount"  resultType="int">
+      select count(*)
+      from TeaFile
+      where status = 1
+    </select>
+    <select id="findAllTeaFile" resultMap="BaseResultMap">
+      select *
+      from TeaFile where status = 1 limit #{currentPage},#{pageSize}
+    </select>
+    <select id="findFileById" parameterType="int" resultMap="BaseResultMap">
+        select *
+        from TeaFile
+        where status = 1 and id = #{value}
+    </select>
+    <select id="findAcaAllFile" resultMap="BaseResultMap">
+        select TeaFile.*
+        from TeaFile,Tea,Major,Aca
+        where TeaFile.status = 1
+        and Aca.id = Major.aca_id
+        and Major.id = Tea.major_id
+        and Tea.tno = TeaFile.tno
+        and Aca.id = #{aca_id} limit #{currentPage},#{pageSize}
+    </select>
+    <select id="findAcaAllFileCount" parameterType="int" resultType="int">
+        select count(*)
+        from TeaFile,Tea,Major,Aca
+        where TeaFile.status = 1
+        and Aca.id = Major.aca_id
+        and Major.id = Tea.major_id
+        and Tea.tno = TeaFile.tno
+        and Aca.id = #{value}
+    </select>
+    <select id="findMajorAllFile" resultMap="BaseResultMap">
+        select TeaFile.*
+        from TeaFile,Tea,Major
+        where TeaFile.status = 1
+        and Major.id = Tea.major_id
+        and Tea.tno = TeaFile.tno
+        and Major.id = #{major_id} limit #{currentPage},#{pageSize}
+    </select>
+    <select id="findMajorAllFileCount" parameterType="int" resultType="int">
+        select count(*)
+        from TeaFile,Tea,Major
+        where TeaFile.status = 1
+        and Major.id = Tea.major_id
+        and Tea.tno = TeaFile.tno
+        and Major.id = #{value}
+    </select>
+    <update id="updateFileDownloadNumAdd" >
+        update TeaFile
+        set download_number = #{downloadNumber} where id = #{id}
+    </update>
+
+    <update id="deleteFile" parameterType="int">
+        update TeaFile set status = 0 where id = #{value}
+    </update>
+
+</mapper>

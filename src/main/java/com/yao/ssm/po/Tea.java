@@ -15,7 +15,7 @@ public class Tea {
     private String tbirth;
     private int major_id;
     private int sign;
-    private String sreg_date;
+    private String treg_date;
 
     public int getId() {
         return id;
@@ -97,12 +97,12 @@ public class Tea {
         this.sign = sign;
     }
 
-    public String getSreg_date() {
-        return sreg_date;
+    public String getTreg_date() {
+        return treg_date;
     }
 
-    public void setSreg_date(String sreg_date) {
-        this.sreg_date = sreg_date;
+    public void setTreg_date(String treg_date) {
+        this.treg_date = treg_date;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Tea {
                 ", tbirth='" + tbirth + '\'' +
                 ", major_id=" + major_id +
                 ", sign=" + sign +
-                ", sreg_date='" + sreg_date + '\'' +
+                ", sreg_date='" + treg_date + '\'' +
                 '}';
     }
 }

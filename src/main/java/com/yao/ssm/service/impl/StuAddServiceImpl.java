@@ -6,12 +6,14 @@ import com.yao.ssm.po.StuAdd;
 import com.yao.ssm.service.StuAddService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author shkstart
  * @create 2019-05-09 10:42
  */
 @Service("stuAddService")
+@Transactional
 public class StuAddServiceImpl implements StuAddService {
     @Autowired
     private StuAddMapper stuAddMapper;

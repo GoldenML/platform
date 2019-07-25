@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link type="text/css" rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+        <script type="text/javascript" language="javascript" src="js/jquery-2.1.0.js" ></script>
+        <script type="text/javascript" language="javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <style>
+            #button{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+    System.currentTime;
+        <input id="button" type="button" value="dian">
+        <p id="my" style="display: block;">hello</p>
+        <p id="her" style="display: none;">world</p>
+    </body>
+    <script>
+        var date = new Date();
+        console.log(""+date.getHours()+date.getMinutes()+date.getSeconds());
+        // $(function () {
+        //     $("#button").click(function () {
+        //         if($("#my").css("display") == "block"){
+        //             $("#my").hide();
+        //             $("#her").show();
+        //         }else{
+        //             $("#her").hide();
+        //             $("#my").show()
+        //         }
+        //     })
+        // })
+    </script>
+    </body>
+</html>

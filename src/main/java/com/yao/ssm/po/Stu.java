@@ -1,8 +1,5 @@
 package com.yao.ssm.po;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Stu{
     private int id;
     private int sno;
@@ -15,6 +12,7 @@ public class Stu{
     private String sbirth;
     private int sign;
     private String sreg_date;
+//    private PageUtil messagePageUtil;
 
     public int getId() {
         return id;
@@ -104,6 +102,16 @@ public class Stu{
     public void setSreg_date(String sreg_date) {
         this.sreg_date = sreg_date;
     }
+
+
+//    public PageUtil getMessagePageUtil() {
+//        return messagePageUtil;
+//    }
+//
+//    public void setMessagePageUtil(PageUtil messagePageUtil) {
+//        this.messagePageUtil = messagePageUtil;
+//    }
+
 
     @Override
     public String toString() {

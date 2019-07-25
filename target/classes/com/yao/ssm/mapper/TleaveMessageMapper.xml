@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.TleaveMessageMapper">
+    <resultMap id="BaseResultMap" type="com.yao.ssm.po.TleaveMessage">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="tname" jdbcType="CHAR" property="tname" />
+        <result column="sleave_message_id" jdbcType="INTEGER" property="sleaveMessageId" />
+        <result column="tno" jdbcType="INTEGER" property="tno" />
+        <result column="tlm_content" jdbcType="CHAR" property="tlmContent" />
+        <result column="tlm_date" jdbcType="CHAR" property="tlmDate" />
+    </resultMap>
+    <insert id="insert" parameterType="tleaveMessage">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        insert into TleaveMessage(tname,sleave_message_id,tno,tlm_content,tlm_date)
+        values(#{tname},#{sleaveMessageId},#{tno},#{tlmContent},#{tlmDate})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from TleaveMessage where id = #{value}
+    </delete>
+    <select id="findBySlmId" resultMap="BaseResultMap">
+        select * from TleaveMessage where sleave_message_id = #{slmId} order by id desc limit 0,1
+    </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.ChatMapper">
+    <insert id="insert" parameterType="chat">
+        insert into Chat(tno,chatName,time) values(#{tno},#{chatName},#{time})
+    </insert>
+    <select id="findByTno" parameterType="int" resultType="chat">
+        select * from  Chat where status = 1 and tno = #{value}
+    </select>
+    <update id="deleteByTno" parameterType="int">
+        update Chat set status = 0 where status = 1 and tno = #{tno}
+    </update>
+    <select id="findByName" parameterType="String" resultType="chat">
+        select * from  Chat where status = 1 and chatName = #{value}
+    </select>
+</mapper>

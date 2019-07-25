@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.AnnouncementMapper">
+    <insert id="insert" parameterType="announcement">
+        insert into Announcement(tno,content,time) values(#{tno},#{content},#{time})
+    </insert>
+    <select id="findCount" parameterType="int" resultType="int">
+        select count(*) from Announcement where tno = #{value}
+    </select>
+    <select id="findCountByStatus" parameterType="int" resultType="int">
+        select count(*) from Announcement where status = #{values}
+    </select>
+    <select id="findByTno" resultType="announcement">
+        select * from Announcement where tno = #{tno} limit #{currentPage},#{pageSize}
+    </select>
+    <select id="findByStatus" resultType="announcement">
+        select * from Announcement where status = #{status} limit #{currentPage},#{pageSize}
+    </select>
+    <update id = "agreeAnnounce" parameterType="int">
+        update Announcement set handleStatus = '允许',status  = 1 where id = #{value}
+    </update>
+    <update id = "disagreeAnnounce" parameterType="int">
+        update Announcement set handleStatus = '不允许',status  = 1 where id = #{value}
+    </update>
+    <select id="indexAnnounce" resultType="announcement">
+        select * from Announcement where status = 1 order by time desc limit 0,10
+    </select>
+    <delete id="deleteById" parameterType="int">
+        delete from Announcement where id = #{value}
+    </delete>
+</mapper>

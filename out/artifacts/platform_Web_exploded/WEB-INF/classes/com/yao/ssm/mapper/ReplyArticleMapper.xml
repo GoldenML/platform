@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.ReplyArticleMapper">
+    <insert id="insert" parameterType="replyArticle">
+        insert into ReplyArticle(articleId,no,content,time) values(#{articleId},#{no},#{content},#{time})
+    </insert>
+    <select id="findByArticleId" parameterType="int" resultType="replyArticle">
+        select * from ReplyArticle where articleId = #{value} and sourceId = 0
+    </select>
+    <select id="findBySourceId" parameterType="int" resultType="replyArticle">
+        select * from ReplyArticle where sourceId = #{value} order by time asc
+    </select>
+    <insert id="insertReply" parameterType="replyArticle">
+        insert into ReplyArticle(articleId,no,sourceId,sourceNo,peoToPeo,content,time) values(#{articleId},#{no},#{sourceId},#{sourceNo},#{peoToPeo},#{content},#{time})
+    </insert>
+</mapper>

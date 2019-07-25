@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +44,11 @@ public class SysController {
     @RequestMapping(value ="/addTeacher",method = RequestMethod.POST)
     public Map addTeacher(Tea tea, TeaAdd teaAdd)throws Exception{
         Map<String,Object> map = new HashMap<String,Object>();
-        Tea tea1 = null;
+        Tea tea1 = teaService.findByTea(tea);
+        if(tea1!=null){
+            map.put("code",2);
+            return map;
+        }
         int tno;
         do{
             int tno_add = (int)Math.floor(Math.random() * 100000);
@@ -52,7 +58,10 @@ public class SysController {
         }while(tea1!=null);
         tea.setTno(tno);
         tea.setPasswd(tea.getTphone().substring(5,11));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         teaAdd.setTno(tno);
+        Date date =new Date();
+        tea.setTreg_date(format.format(date));
         sysService.addTeacher(tea);
         sysService.addTeacherAdd(teaAdd);
         map.put("code",1);

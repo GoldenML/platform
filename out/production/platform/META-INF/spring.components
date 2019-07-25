@@ -1,0 +1,4 @@
+#
+#Wed May 08 16:33:18 CST 2019
+com.yao.ssm.controller.StuController=org.springframework.stereotype.Component
+com.yao.ssm.service.impl.StuServiceImpl=org.springframework.stereotype.Component

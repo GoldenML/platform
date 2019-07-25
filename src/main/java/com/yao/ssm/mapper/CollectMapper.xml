@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.CollectMapper">
+    <insert id="insert" parameterType="Collect">
+      insert into Collect(article_id,sno,col_date) values(#{article_id},#{sno},#{col_date})
+    </insert>
+    <delete id="delete" parameterType="int">
+        delete from Collect where id = #{value}
+    </delete>
+    <select id="find" resultType="Collect">
+        select * from Collect where sno = #{sno} and article_id = #{article_id}
+    </select>
+    <select id="findBySno" resultType="Collect">
+        select * from Collect where sno = #{sno} limit #{currentPage},#{pageSize}
+    </select>
+    <delete id="deleteBySno">
+        delete from Collect where sno = #{sno} and article_id = #{article_id}
+    </delete>
+    <select id="findCountBySno" resultType="int">
+        select count(*) from Collect where sno = #{sno}
+    </select>
+</mapper>

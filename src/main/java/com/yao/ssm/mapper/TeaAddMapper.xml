@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.ssm.mapper.TeaAddMapper">
+    <select id="findByTno" parameterType="int" resultType="teaAdd">
+        select * from TeaAdd where sign = 1 and tno = #{value}
+    </select>
+    <update id="updateInformationByTno" parameterType="teaAdd">
+        update TeaAdd set taddress=#{taddress},temail=#{temail},tintro=#{tintro} where tno = #{tno}
+    </update>
+    <select id="findTeacherAddPage" resultType="TeaAdd">
+        select * from TeaAdd where sign = 1 limit #{currentPage},#{pageSize}
+    </select>
+    <update id="deleteByTno" parameterType="int">
+        update Tea set sign = 0 where tno = #{value}
+    </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.yao.ssm.controller;
 
 
+import com.yao.ssm.po.SleaveMessage;
 import com.yao.ssm.po.Stu;
 import com.yao.ssm.po.StuAdd;
 import com.yao.ssm.service.StuAddService;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,10 +45,10 @@ public class StuController {
 //        String sno = request.getParameter("sno");
 //        String gno = request.getParameter("gno");
         int gno=stu.getGno();
-        stu = stuService.findByPhone(stu.getSphone());
+        Stu stu2 = stuService.findByPhone(stu.getSphone());
         Map<String,Object> map = new HashMap<String,Object>();
         Stu stu1 = null;
-        if(stu!=null){
+        if(stu2!=null){
             map.put("code",1);
             return map;
         }else {
@@ -59,10 +61,11 @@ public class StuController {
             }while(stu1!=null);
 //            System.out.println(sno_s + " , " + sname + " , " + passwd + " , " + sphone + " , " + gno);
 //            System.out.println(sno_s.getClass().toString() + " , " + sname.getClass().toString() + " , " + passwd.getClass().toString() + " , " + sphone.getClass().toString() + " , " + gno);
+            System.out.println(sno);
             stu.setSno(sno);
-            SimpleDateFormat formatt= new SimpleDateFormat("yyyy-MM-dd") ;
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
             Date date =new Date();
-            stu.setSreg_date(formatt.format(date));
+            stu.setSreg_date(format.format(date));
 //            System.out.println(sno + " , " + sname + " , " + passwd + " , " + sphone + " , " + gno);
             stuService.insertStu(stu);
 
@@ -78,17 +81,31 @@ public class StuController {
     }
 //    登录
     @ResponseBody
-    @RequestMapping(value="/login",method = RequestMethod.POST)
-    public Map login(Stu stu,HttpServletRequest request, HttpServletResponse response)throws Exception{
+    @RequestMapping(value="/login")
+    public Map login(Stu stu,HttpServletRequest request, HttpServletResponse response){
 //        int sno = Integer.parseInt(request.getParameter("sno"));
 //        String passwd = request.getParameter("passwd");
-        Stu stu1 = stuService.findBySno(stu.getSno());
         Map<String,Object> map = new HashMap<String,Object>();
-        if(stu1.getPasswd().equals(stu.getPasswd())){
-            request.getSession().setAttribute("stu",stu1);
-            StuAdd stuAdd = stuAddService.findBySno(stu.getSno());
-            request.getSession().setAttribute("stuAdd",stuAdd);
+        Stu stu1 = null;
+        try {
+            stu1 = stuService.findBySno(stu.getSno());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("根据学生账号查找学生出错");
+        }
+        if(stu1==null){
+            map.put("code",2);
+        }else if(stu1.getPasswd().equals(stu.getPasswd())){
             map.put("code",1);
+            request.getSession().setAttribute("stu",stu1);
+            StuAdd stuAdd = null;
+            try {
+                stuAdd = stuAddService.findBySno(stu.getSno());
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("根据学生账号查找学生附加属性出错");
+            }
+            request.getSession().setAttribute("stuAdd",stuAdd);
         }else{
             map.put("code",2);
         }
@@ -124,6 +141,23 @@ public class StuController {
         request.getSession().setAttribute("stu",stu);
         request.getSession().setAttribute("stuAdd",stuAdd);
         map.put("code",1);
+        return map;
+    }
+    @ResponseBody
+    @RequestMapping(value="/findMesBySno",method = RequestMethod.POST)
+    public Map findMesBySno(Stu stu,HttpServletRequest request)throws Exception{
+        List<Object> list = stuService.findMesBySno(stu.getSno());
+        Map<String,Object> map = new HashMap<String, Object>();
+        int count = stuService.findMesCount(stu.getSno());
+        int pageSize=10;
+        int totlePageSize = count / pageSize;
+        if (count % pageSize != 0) {
+            totlePageSize++;
+        }
+        map.put("list",list);
+        map.put("count",count);
+        map.put("pageSize",pageSize);
+        map.put("totlePageSize",totlePageSize);
         return map;
     }
 }
